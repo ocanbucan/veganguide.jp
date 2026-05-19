@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ヴィーガンガイド — vegan guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:     #f7f5f0;
+      --text:   #1a1a18;
+      --muted:  #7a7a72;
+      --accent: #9b2d22;
+      --line:   rgba(26,26,24,0.10);
+      --line-s: rgba(26,26,24,0.18);
+      --white:  #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif JP', serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 24px;
+      height: 54px;
+    }
+
+    .site-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .site-logo span { color: var(--accent); }
+
+    /* ── RIGHT SIDE of header: search + lang toggle ── */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--line-s);
+      border-radius: 1px;
+      overflow: hidden;
+      background: var(--white);
+      transition: border-color 0.2s;
+      flex: 1;
+      max-width: 260px;
+      min-width: 0;
+    }
+    .search-wrap:focus-within { border-color: var(--text); }
+
+    #search-input {
+      border: none;
+      outline: none;
+      background: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      padding: 7px 10px;
+      width: 100%;
+      min-width: 0;
+    }
+    #search-input::placeholder { color: var(--muted); }
+
+    .search-icon-btn {
+      border: none;
+      background: none;
+      padding: 7px 10px;
+      cursor: pointer;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .search-icon-btn:hover { color: var(--text); }
+
+    /* ── LANG TOGGLE ── */
+    #lang-toggle {
+      display: flex;
+      border: 1px solid var(--line-s);
+      border-radius: 1px;
+      overflow: hidden;
+      background: var(--white);
+      flex-shrink: 0;
+    }
+    #lang-toggle.hidden { display: none; }
+
+    #lang-toggle button {
+      background: none;
+      border: none;
+      padding: 5px 10px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background 0.18s, color 0.18s;
+      white-space: nowrap;
+    }
+    #lang-toggle button.active {
+      background: var(--text);
+      color: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      height: 38px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-top: 1px solid var(--line);
+      gap: 2px;
+    }
+    nav::-webkit-scrollbar { display: none; }
+
+    .nav-sep {
+      width: 1px;
+      height: 12px;
+      background: var(--line-s);
+      margin: 0 6px;
+      flex-shrink: 0;
+    }
+
+    .cat-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.16s, background 0.16s;
+    }
+    .cat-btn:hover { color: var(--text); }
+    .cat-btn.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 40px 24px 100px;
+    }
+
+    #result-info {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 24px;
+      min-height: 14px;
+    }
+
+    /* ── CATEGORY GROUP LABEL ── */
+    .cat-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      padding: 28px 0 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .cat-label:first-child { padding-top: 0; }
+
+    /* ── Q&A ITEM ── */
+    .qa-item { border-bottom: 1px solid var(--line); }
+
+    .qa-q {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 17px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .qa-q:hover .qa-q-text { opacity: 0.65; }
+
+    .qa-q-text {
+      font-size: clamp(14px, 2.2vw, 16px);
+      font-weight: 300;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      flex: 1;
+      transition: opacity 0.15s;
+    }
+
+    .qa-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      color: var(--muted);
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), color 0.2s;
+    }
+    .qa-item.open .qa-icon {
+      transform: rotate(45deg);
+      color: var(--text);
+    }
+
+    .qa-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.36s cubic-bezier(0.4,0,0.2,1);
+    }
+    .qa-item.open .qa-body { grid-template-rows: 1fr; }
+    .qa-body-inner { overflow: hidden; }
+
+    .qa-a-text {
+      font-size: clamp(13px, 2vw, 15px);
+      font-weight: 300;
+      line-height: 1.95;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+      padding-bottom: 20px;
+      padding-right: 32px;
+    }
+
+    /* ── HIGHLIGHT ── */
+    mark {
+      background: rgba(155,45,34,0.11);
+      color: var(--accent);
+      border-radius: 1px;
+      padding: 0 1px;
+    }
+
+    /* ── EMPTY ── */
+    #empty {
+      display: none;
+      text-align: center;
+      padding: 72px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--line-s);
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 520px) {
+      .header-top { padding: 0 14px; height: 50px; gap: 8px; }
+      nav { padding: 0 12px; }
+      main { padding: 28px 14px 80px; }
+      .search-wrap { max-width: none; }
+      .qa-a-text { padding-right: 0; }
+      #lang-toggle button { padding: 5px 8px; font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <a class="site-logo" onclick="resetAll()" id="site-logo">ヴィーガン<span>ガイド</span></a>
+    <div class="header-right">
+      <div class="search-wrap">
+        <input id="search-input" type="text" autocomplete="off" oninput="onSearch()" />
+        <button class="search-icon-btn" onclick="document.getElementById('search-input').focus()" aria-label="search">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="5.5" cy="5.5" r="4"/>
+            <line x1="9" y1="9" x2="12" y2="12"/>
+          </svg>
+        </button>
+      </div>
+      <div id="lang-toggle">
+        <button id="btn-jp" onclick="setLang('jp')">日本語</button>
+        <button id="btn-en" onclick="setLang('en')">en</button>
+      </div>
+    </div>
+  </div>
+  <nav id="nav"></nav>
+</header>
+
+<main>
+  <div id="result-info"></div>
+  <div id="list"></div>
+  <div id="empty"></div>
+</main>
+
+<footer id="site-footer">ヴィーガンガイド &mdash; vegan guide</footer>
+
+<script>
+/* ════════════════════════════════════════════════
+   ★  PARAMETER  ★
+   language_exchange = 1  → bilingual toggle visible
+   language_exchange = 0  → Japanese only, toggle hidden
+   ════════════════════════════════════════════════ */
+const language_exchange = 1;
+
+/* ════════════════════════════════════════════════
+   CATEGORY CONFIG
+   key      : internal identifier (matches JSON "category" field)
+   label-jp : shown in nav when lang === 'jp'
+   label-en : shown in nav when lang === 'en'
+   sep      : show separator BEFORE this item
+   ════════════════════════════════════════════════ */
+const CATS = [
+  { key: 'all',       'label-jp': 'すべて',   'label-en': 'all',       sep: false },
+  { key: 'why',       'label-jp': 'なぜ',     'label-en': 'why',       sep: true  },
+  { key: 'how',       'label-jp': 'どうやって','label-en': 'how',       sep: false },
+  { key: 'theory',    'label-jp': '理論',     'label-en': 'theory',    sep: false },
+  { key: 'food',      'label-jp': '食事',     'label-en': 'food',      sep: true  },
+  { key: 'health',    'label-jp': '健康',     'label-en': 'health',    sep: false },
+  { key: 'cosmetics', 'label-jp': '化粧品',   'label-en': 'cosmetics', sep: false },
+  { key: 'resources', 'label-jp': '参考資料', 'label-en': 'resources', sep: true  },
+];
+
+/* ════════════════════════════════════════════════
+   QUESTIONS — embedded (works from file:// too)
+   Add your questions here, or keep in sync with
+   questions.json for reference.
+   ════════════════════════════════════════════════ */
+const QUESTIONS = [
+  {
+    "id": "why-vegan-001",
+    "category": "why",
+    "question-jp": "なぜヴィーガンになるべきなのですか？",
+    "answer-jp": "ヴィーガンになることは、動物、環境、そして自分自身の健康に対して最も大きな影響を与える選択のひとつです。毎回の食事は選択であり、植物性の食事は苦しみを減らし、温室効果ガスの排出を削減し、心臓病・2型糖尿病・一部のがんのリスク低下とも関連しています。",
+    "question-en": "Why should I go vegan?",
+    "answer-en": "Going vegan is one of the most impactful decisions you can make for animals, the environment, and your own health. Every meal is a choice — and plant-based choices reduce suffering, lower greenhouse gas emissions, and have been linked to lower rates of heart disease, type 2 diabetes, and certain cancers."
+  },
+  {
+    "id": "why-animals-002",
+    "category": "why",
+    "question-jp": "動物を食べることは自然なことではないですか？",
+    "answer-jp": "「自然である」という論理は、倫理的に正しいことを意味しません。自然界では、私たちが支持しないような多くの苦しみも起きています。人間には、自分の選択を振り返り、思いやりをもって行動できるという特別な能力があります。特に多様な植物性食品が手に入る社会では、動物性食品がなくても生きていけます。",
+    "question-en": "Isn't it natural to eat animals?",
+    "answer-en": "The 'natural' argument doesn't determine what is ethical. Many things that occur in nature involve suffering we would not endorse. Humans have the unique capacity to reflect on our choices and act with compassion. We no longer need animal products to survive — especially in societies with access to diverse plant foods."
+  },
+  {
+    "id": "how-start-001",
+    "category": "how",
+    "question-jp": "ヴィーガンになるにはどうすれば良いですか？",
+    "answer-jp": "今いる場所から始めてください。一晩ですべてを変える必要はありません。多くの人は、まず1日1食を置き換えることから始め、徐々に増やしていきます。好きな料理の植物性バージョンを探したり、サポートしてくれるコミュニティを見つけたり、制限ではなく豊かさに目を向けましょう。目標は完璧ではなく、前進することです。",
+    "question-en": "How do I start going vegan?",
+    "answer-en": "Start where you are. You don't need to change everything overnight. Many people begin by replacing one meal a day, then gradually shifting more. Explore plant-based versions of your favorite dishes, find communities for support, and focus on abundance rather than restriction. The goal is progress, not perfection."
+  },
+  {
+    "id": "how-protein-002",
+    "category": "how",
+    "question-jp": "ヴィーガンはどうやってタンパク質を摂るのですか？",
+    "answer-jp": "タンパク質は植物界に豊富に存在します。豆類（レンズ豆・ひよこ豆・大豆）、豆腐、テンペ、枝豆、セイタン、キヌア、麻の実、多くの野菜にも十分なタンパク質が含まれています。バランスの取れた植物性食事で、ほとんどの人に必要な1日のタンパク質摂取量を十分に満たすことができます。多くのトップアスリートもヴィーガンです。",
+    "question-en": "How do vegans get enough protein?",
+    "answer-en": "Protein is abundant in the plant kingdom. Legumes (lentils, chickpeas, beans), tofu, tempeh, edamame, seitan, quinoa, hemp seeds, and many vegetables all contain significant protein. A varied plant-based diet easily meets the recommended daily intake for most people. Many elite athletes are vegan."
+  },
+  {
+    "id": "theory-speciesism-001",
+    "category": "theory",
+    "question-jp": "種差別（スペシシズム）とは何ですか？",
+    "answer-jp": "種差別とは、ある種（通常は人間）が本質的に他の種よりも価値があるという思い込みであり、搾取を正当化するために用いられます。哲学者ピーター・シンガーが1975年にこの言葉を提唱し、人種差別・性差別と類比しました。それぞれの場合において、道徳的に無関係な特性（種・人種・性別）が不平等な扱いを正当化するために使われています。",
+    "question-en": "What is speciesism?",
+    "answer-en": "Speciesism is the assumption that one species — typically humans — is inherently more valuable than others, leading to the justification of exploitation. Philosopher Peter Singer introduced the term in 1975, drawing a parallel with racism and sexism: in each case, morally irrelevant characteristics (species, race, gender) are used to justify unequal treatment."
+  },
+  {
+    "id": "food-japanese-001",
+    "category": "food",
+    "question-jp": "日本でヴィーガン食は食べられますか？",
+    "answer-jp": "はい、ただし注意が必要です。伝統的な日本料理には植物性の料理が多くありますが、ヴィーガンに見える食品にも出汁（魚介から取ったもの）が隠れていることがあります。完全に植物性の精進料理を探すとよいでしょう。コンビニでも植物性の選択肢が増えており、大都市にはヴィーガン専門レストランもあります。",
+    "question-en": "Can I eat vegan in Japan?",
+    "answer-en": "Yes, though it requires awareness. Traditional Japanese cuisine contains many plant-based dishes, but dashi (fish stock) is often hidden in seemingly vegan foods. Look for shojin ryori (Buddhist temple cuisine), which is fully plant-based. Convenience stores increasingly carry plant-based options, and major cities have dedicated vegan restaurants."
+  },
+  {
+    "id": "health-b12-001",
+    "category": "health",
+    "question-jp": "ヴィーガンはビタミンB12のサプリメントを摂る必要がありますか？",
+    "answer-jp": "はい。ビタミンB12は細菌によって生産され、動物性食品または強化食品にのみ確実に含まれています。ヴィーガンはB12を継続的に補給する必要があります——これは絶対に欠かせません。不足すると時間とともに深刻な神経障害を引き起こす可能性があります。シアノコバラミン型のサプリメントを1日250mcg、または1週間2500mcgが最もよく研究されている摂取法です。",
+    "question-en": "Do vegans need to take B12 supplements?",
+    "answer-en": "Yes. Vitamin B12 is produced by bacteria and found reliably only in animal products or fortified foods. Vegans should supplement B12 consistently — this is non-negotiable. A deficiency can cause serious neurological damage over time. A cyanocobalamin supplement of 250mcg daily or 2500mcg weekly is the most well-studied form."
+  },
+  {
+    "id": "cosmetics-cruelty-001",
+    "category": "cosmetics",
+    "question-jp": "化粧品の「クルエルティフリー」とはどういう意味ですか？",
+    "answer-jp": "クルエルティフリーの化粧品とは、製造のいかなる段階においても動物実験が行われていない製品を指します。ただし、「クルエルティフリー」は自動的にヴィーガンを意味しません——ラノリン（羊毛由来）、カルミン（カイガラムシを砕いたもの）、コラーゲンなど、動物由来の成分が含まれている場合があります。Leaping BunnyやPETAなど、「クルエルティフリー」と「ヴィーガン」両方の認証を確認しましょう。",
+    "question-en": "What does 'cruelty-free' mean for cosmetics?",
+    "answer-en": "A cruelty-free cosmetic product has not been tested on animals at any stage of its production. However, 'cruelty-free' does not automatically mean vegan — the product may still contain animal-derived ingredients like lanolin (wool), carmine (crushed beetles), or collagen. Look for both 'cruelty-free' and 'vegan' certifications, such as those from Leaping Bunny or PETA."
+  },
+  {
+    "id": "resources-books-001",
+    "category": "resources",
+    "question-jp": "ヴィーガニズムについて学ぶためにどんな本を読むべきですか？",
+    "answer-jp": "主要な書籍として：ピーター・シンガー著『動物の解放』（現代動物権利運動の哲学的基盤）、マイケル・グレガー医師著『How Not to Die』（栄養科学）、ジョナサン・サフラン・フォア著『イーティング・アニマルズ』（文学的考察）、T・コリン・キャンベル著『チャイナ・スタディ』（植物性食事に関する疫学研究）、ジャック・ノリス＆ヴァージニア・メッシーナ著『Vegan for Life』（実践的栄養ガイド）などがあります。",
+    "question-en": "What books should I read to learn more about veganism?",
+    "answer-en": "Some key texts: 'Animal Liberation' by Peter Singer (the philosophical foundation of the modern animal rights movement), 'How Not to Die' by Dr. Michael Greger (nutrition science), 'Eating Animals' by Jonathan Safran Foer (a literary exploration), 'The China Study' by T. Colin Campbell (epidemiological research on plant-based diets), and 'Vegan for Life' by Jack Norris & Virginia Messina (practical nutrition guide)."
+  }
+];
+
+/* ════════════════════════════════════════════════
+   UI STRINGS per language
+   ════════════════════════════════════════════════ */
+const UI = {
+  jp: {
+    placeholder:  '検索…',
+    empty:        '見つかりませんでした。',
+    resultSearch: (q, n) => `「${q}」— ${n} 件`,
+    resultCat:    (cat, n) => `${cat}  —  ${n} 件`,
+    resultAll:    n => `${n} 件`,
+  },
+  en: {
+    placeholder:  'search…',
+    empty:        'no results found.',
+    resultSearch: (q, n) => `"${q}" — ${n} result${n === 1 ? '' : 's'}`,
+    resultCat:    (cat, n) => `${cat}  —  ${n} result${n === 1 ? '' : 's'}`,
+    resultAll:    n => `${n} entries`,
+  }
+};
+
+/* ════════════════════════════════════════════════
+   STATE
+   ════════════════════════════════════════════════ */
+let lang        = 'jp';   // 'jp' | 'en'
+let activeCat   = 'all';
+let searchQuery = '';
+let openId      = null;
+
+/* ════════════════════════════════════════════════
+   BOOT — apply language_exchange param
+   ════════════════════════════════════════════════ */
+(function boot() {
+  if (!language_exchange) {
+    document.getElementById('lang-toggle').classList.add('hidden');
+  }
+  syncLangButtons();
+  buildNav();
+  render();
+})();
+
+/* ════════════════════════════════════════════════
+   LANGUAGE
+   ════════════════════════════════════════════════ */
+function setLang(l) {
+  if (l === lang) return;
+  lang = l;
+  document.documentElement.lang = l === 'jp' ? 'ja' : 'en';
+  syncLangButtons();
+  document.getElementById('search-input').placeholder = UI[lang].placeholder;
+  // update logo
+  const logo = document.getElementById('site-logo');
+  if (lang === 'jp') logo.innerHTML = 'ヴィーガン<span style="color:var(--accent)">ガイド</span>';
+  else               logo.innerHTML = 'vegan<span style="color:var(--accent)">guide</span>';
+  buildNav();
+  render();
+}
+
+function syncLangButtons() {
+  document.getElementById('btn-jp').classList.toggle('active', lang === 'jp');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+
+/* ════════════════════════════════════════════════
+   NAV
+   ════════════════════════════════════════════════ */
+function buildNav() {
+  const nav = document.getElementById('nav');
+  const labelKey = `label-${lang}`;
+  let html = '';
+  CATS.forEach(c => {
+    if (c.sep) html += '<div class="nav-sep"></div>';
+    const label = c[labelKey] || c['label-jp'];
+    html += `<button class="cat-btn${activeCat === c.key ? ' active' : ''}" onclick="setCat('${c.key}')">${label}</button>`;
+  });
+  nav.innerHTML = html;
+}
+
+function setCat(key) {
+  activeCat = key;
+  openId = null;
+  buildNav();
+  render();
+}
+
+/* ════════════════════════════════════════════════
+   SEARCH
+   ════════════════════════════════════════════════ */
+function onSearch() {
+  searchQuery = document.getElementById('search-input').value.trim();
+  if (searchQuery) { activeCat = 'all'; buildNav(); }
+  openId = null;
+  render();
+}
+
+function resetAll() {
+  activeCat = 'all';
+  searchQuery = '';
+  openId = null;
+  document.getElementById('search-input').value = '';
+  buildNav();
+  render();
+}
+
+/* ════════════════════════════════════════════════
+   FILTER
+   ════════════════════════════════════════════════ */
+function filtered() {
+  let items = QUESTIONS;
+  if (activeCat !== 'all') {
+    items = items.filter(q => (q.category || '') === activeCat);
+  }
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    // always search both languages so JP and EN terms always work
+    items = items.filter(i =>
+      (i['question-jp'] || '').toLowerCase().includes(q) ||
+      (i['answer-jp']   || '').toLowerCase().includes(q) ||
+      (i['question-en'] || '').toLowerCase().includes(q) ||
+      (i['answer-en']   || '').toLowerCase().includes(q)
+    );
+  }
+  return items;
+}
+
+/* ════════════════════════════════════════════════
+   RENDER
+   ════════════════════════════════════════════════ */
+function render() {
+  const items = filtered();
+  const list  = document.getElementById('list');
+  const empty = document.getElementById('empty');
+  const info  = document.getElementById('result-info');
+  const ui    = UI[lang];
+
+  // update empty text for current lang
+  empty.textContent = ui.empty;
+
+  if (!items.length) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    info.textContent = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // result info
+  if (searchQuery) {
+    info.textContent = ui.resultSearch(searchQuery, items.length);
+  } else if (activeCat !== 'all') {
+    const cat = CATS.find(c => c.key === activeCat);
+    const catLabel = cat ? (cat[`label-${lang}`] || cat['label-jp']) : activeCat;
+    info.textContent = ui.resultCat(catLabel, items.length);
+  } else {
+    info.textContent = ui.resultAll(items.length);
+  }
+
+  const showGroups = activeCat === 'all' && !searchQuery;
+  let html = '';
+
+  if (showGroups) {
+    const catOrder = CATS.filter(c => c.key !== 'all').map(c => c.key);
+    const byCat = {};
+    items.forEach(q => { (byCat[q.category] = byCat[q.category] || []).push(q); });
+
+    catOrder.forEach(catKey => {
+      if (!byCat[catKey]) return;
+      const catObj   = CATS.find(c => c.key === catKey);
+      const catLabel = catObj ? (catObj[`label-${lang}`] || catObj['label-jp']) : catKey;
+      html += `<div class="cat-label">${catLabel}</div>`;
+      byCat[catKey].forEach(q => { html += buildItem(q); });
+    });
+    // unknown categories
+    items.forEach(q => {
+      if (!catOrder.includes(q.category)) html += buildItem(q);
+    });
+  } else {
+    items.forEach(q => { html += buildItem(q); });
+  }
+
+  list.innerHTML = html;
+
+  // restore open state instantly (no animation on re-render)
+  if (openId) {
+    const el = document.getElementById('i-' + openId);
+    if (el) el.classList.add('open');
+  }
+}
+
+function buildItem(q) {
+  const id   = q.id;
+  const qRaw = q[`question-${lang}`] || q['question-jp'] || '';
+  const aRaw = q[`answer-${lang}`]   || q['answer-jp']   || '';
+  const qTxt = hl(qRaw);
+  const aTxt = hl(aRaw);
+  const open = openId === id;
+  return `<div class="qa-item${open ? ' open' : ''}" id="i-${id}">
+  <div class="qa-q" onclick="toggle('${id}')">
+    <div class="qa-q-text">${qTxt}</div>
+    <svg class="qa-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3">
+      <line x1="7" y1="1" x2="7" y2="13"/>
+      <line x1="1" y1="7" x2="13" y2="7"/>
+    </svg>
+  </div>
+  <div class="qa-body"><div class="qa-body-inner"><div class="qa-a-text">${aTxt}</div></div></div>
+</div>`;
+}
+
+/* ════════════════════════════════════════════════
+   TOGGLE
+   ════════════════════════════════════════════════ */
+function toggle(id) {
+  if (openId === id) {
+    document.getElementById('i-' + id)?.classList.remove('open');
+    openId = null;
+  } else {
+    if (openId) document.getElementById('i-' + openId)?.classList.remove('open');
+    document.getElementById('i-' + id)?.classList.add('open');
+    openId = id;
+  }
+}
+
+/* ════════════════════════════════════════════════
+   HIGHLIGHT
+   ════════════════════════════════════════════════ */
+function esc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function hl(text) {
+  if (!searchQuery) return esc(text);
+  const safe = esc(text);
+  const re   = new RegExp(`(${esc(searchQuery).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return safe.replace(re, '<mark>$1</mark>');
+}
+</script>
+</body>
+</html>
