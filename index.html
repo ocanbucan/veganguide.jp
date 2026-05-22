@@ -41,8 +41,10 @@
 
     /* ── HEADER ── */
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 200;
       background: var(--bg);
       border-bottom: 1px solid var(--line);
@@ -200,6 +202,7 @@
       width: 100%;
       margin: 0 auto;
       padding: 40px 24px 100px;
+      padding-top: calc(94px + 40px);
     }
 
     #result-info {
@@ -369,7 +372,7 @@
 
     /* ── READ PROGRESS BAR ── */
     #read-progress {
-      position: absolute;
+      position: fixed;
       top: 0; left: 0;
       height: 2px;
       width: 0%;
@@ -378,9 +381,6 @@
       display: none;
       z-index: 300;
     }
-
-    /* ── HEADER needs relative for progress bar ── */
-    header { position: relative; }
 
     /* ── SEARCH CLEAR BUTTON ── */
     .search-clear {
@@ -776,7 +776,7 @@
     @media (max-width: 520px) {
       .header-top { padding: 0 14px; height: 50px; gap: 8px; }
       nav { padding: 0 12px; }
-      main { padding: 28px 14px 80px; }
+      main { padding: 28px 14px 80px; padding-top: calc(88px + 28px); }
       .search-wrap { max-width: none; }
       .qa-a-text { padding-right: 0; }
       #lang-toggle button { padding: 5px 8px; font-size: 9px; }
