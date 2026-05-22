@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f5f0" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>ヴィーガンガイド — vegan guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:     #f7f5f0;
+      --text:   #1a1a18;
+      --muted:  #7a7a72;
+      --accent: #9b2d22;
+      --line:   rgba(26,26,24,0.10);
+      --line-s: rgba(26,26,24,0.18);
+      --white:  #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif JP', serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 24px;
+      height: 54px;
+    }
+
+    .site-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      user-select: none;
+    }
+    .site-logo span { color: var(--accent); }
+
+    /* ── RIGHT SIDE of header: search + lang toggle ── */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--line-s);
+      border-radius: 1px;
+      overflow: hidden;
+      background: var(--white);
+      transition: border-color 0.2s;
+      flex: 1;
+      max-width: 260px;
+      min-width: 0;
+    }
+    .search-wrap:focus-within { border-color: var(--text); }
+
+    #search-input {
+      border: none;
+      outline: none;
+      background: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      padding: 7px 10px;
+      width: 100%;
+      min-width: 0;
+    }
+    #search-input::placeholder { color: var(--muted); }
+
+    .search-icon-btn {
+      border: none;
+      background: none;
+      padding: 7px 10px;
+      cursor: pointer;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .search-icon-btn:hover { color: var(--text); }
+
+    /* ── LANG TOGGLE ── */
+    #lang-toggle {
+      display: flex;
+      border: 1px solid var(--line-s);
+      border-radius: 1px;
+      overflow: hidden;
+      background: var(--white);
+      flex-shrink: 0;
+    }
+    #lang-toggle.hidden { display: none; }
+
+    #lang-toggle button {
+      background: none;
+      border: none;
+      padding: 5px 10px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background 0.18s, color 0.18s;
+      white-space: nowrap;
+    }
+    #lang-toggle button.active {
+      background: var(--text);
+      color: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      height: 38px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-top: 1px solid var(--line);
+      gap: 2px;
+    }
+    nav::-webkit-scrollbar { display: none; }
+
+    .nav-sep {
+      width: 1px;
+      height: 12px;
+      background: var(--line-s);
+      margin: 0 6px;
+      flex-shrink: 0;
+    }
+
+    .cat-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.16s, background 0.16s;
+    }
+    .cat-btn:hover { color: var(--text); }
+    .cat-btn.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      max-width: 740px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 24px 100px;
+      padding-top: calc(94px + 40px);
+    }
+
+    #result-info {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 24px;
+      min-height: 14px;
+    }
+
+    /* ── CATEGORY GROUP LABEL ── */
+    .cat-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      padding: 28px 0 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .cat-label:first-child { padding-top: 0; }
+
+    /* ── Q&A ITEM ── */
+    .qa-item { border-bottom: 1px solid var(--line); }
+
+    .qa-q {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 17px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .qa-q:hover .qa-q-text { opacity: 0.65; }
+
+    .qa-q-text {
+      font-size: clamp(14px, 2.2vw, 16px);
+      font-weight: 300;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      flex: 1;
+      transition: opacity 0.15s, color 0.22s;
+    }
+
+    .qa-item.open .qa-q-text { color: var(--accent); }
+
+    .qa-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      color: var(--muted);
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), color 0.2s;
+    }
+    .qa-item.open .qa-icon {
+      transform: rotate(45deg);
+      color: var(--text);
+    }
+
+    .qa-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.36s cubic-bezier(0.4,0,0.2,1);
+    }
+    .qa-item.open .qa-body { grid-template-rows: 1fr; }
+    .qa-body-inner { overflow: hidden; }
+
+    .qa-a-text {
+      font-size: clamp(13px, 2vw, 15px);
+      font-weight: 300;
+      line-height: 1.95;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+      padding-bottom: 20px;
+      padding-right: 32px;
+    }
+
+    /* ── HIGHLIGHT ── */
+    mark {
+      background: rgba(155,45,34,0.11);
+      color: var(--accent);
+      border-radius: 1px;
+      padding: 0 1px;
+    }
+
+    /* ── ANSWER FOOTER ── */
+    .qa-footer {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .qa-scroll-top {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.18s;
+    }
+    .qa-scroll-top:hover { color: var(--text); }
+
+    .qa-share-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .qa-share-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.18s;
+    }
+    .qa-share-btn:hover { color: var(--text); }
+
+    .qa-copy-feedback {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .qa-copy-feedback.show { opacity: 1; }
+
+    /* ── EMPTY ── */
+    #empty {
+      display: none;
+      text-align: center;
+      padding: 72px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--line-s);
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── READ PROGRESS BAR ── */
+    #read-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.1s linear;
+      display: none;
+      z-index: 300;
+    }
+
+    /* ── SEARCH CLEAR BUTTON ── */
+    .search-clear {
+      border: none;
+      background: none;
+      padding: 7px 6px;
+      cursor: pointer;
+      color: var(--muted);
+      display: none;
+      align-items: center;
+      flex-shrink: 0;
+      transition: color 0.18s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 36px;
+    }
+    .search-clear:hover { color: var(--text); }
+    .search-clear.visible { display: flex; }
+
+    /* ── SECTION VISIBILITY ── */
+    #blog-section { display: none; }
+    #blog-post    { display: none; }
+
+    /* ── BLOG SEARCH RESULTS ── */
+    .blog-search-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: opacity 0.15s;
+    }
+    .blog-search-card:hover { opacity: 0.7; }
+
+    .blog-search-thumb {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      border-radius: 1px;
+      overflow: hidden;
+      background: var(--line);
+    }
+    .blog-search-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .blog-search-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-style: italic;
+      color: var(--line-s);
+    }
+    .blog-search-title {
+      font-size: clamp(13px, 2vw, 14px);
+      font-weight: 300;
+      line-height: 1.55;
+      color: var(--text);
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ── BLOG PAGINATION ── */
+    .blog-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 36px 0 8px;
+    }
+    .page-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      border: 1px solid var(--line-s);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 1px;
+      min-width: 36px;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.16s, color 0.16s, border-color 0.16s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .page-btn:hover { border-color: var(--text); color: var(--text); }
+    .page-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+    .page-btn:disabled {
+      opacity: 0.3;
+      cursor: default;
+      pointer-events: none;
+    }
+    .page-ellipsis {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+
+    /* ── BLOG NAV BUTTON ── */
+    .blog-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.16s, background 0.16s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+    .blog-btn:hover { color: var(--text); }
+    .blog-btn.active {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* ── BLOG LIST ── */
+    #blog-section { display: none; }
+
+    .blog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .blog-card {
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .blog-card:hover { opacity: 0.7; }
+
+    .blog-thumb {
+      width: 80px;
+      height: 80px;
+      min-width: 60px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border-radius: 1px;
+      background: var(--line);
+    }
+    .blog-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .blog-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--line-s);
+    }
+
+    .blog-meta {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .blog-date {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .blog-title {
+      font-size: clamp(14px, 2.2vw, 16px);
+      font-weight: 300;
+      line-height: 1.55;
+      letter-spacing: 0.01em;
+      color: var(--text);
+    }
+
+    /* ── BLOG POST ── */
+    #blog-post { display: none; }
+
+    .post-back {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.18s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .post-back:hover { color: var(--text); }
+
+    .post-header { margin-bottom: 32px; }
+
+    .post-date {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .post-title {
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 300;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .post-hero {
+      width: 100%;
+      aspect-ratio: 16/7;
+      object-fit: cover;
+      border-radius: 1px;
+      display: block;
+      background: var(--line);
+    }
+
+    .post-hero-placeholder {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: var(--line);
+      border-radius: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-style: italic;
+      color: var(--line-s);
+    }
+
+    .post-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--line-s);
+      margin: 32px 0;
+    }
+
+    .post-body {
+      font-size: clamp(14px, 2.2vw, 16px);
+      font-weight: 300;
+      line-height: 1.95;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+    }
+    .post-body p { margin-bottom: 20px; }
+    .post-body p:last-child { margin-bottom: 0; }
+
+    /* ── POST FOOTER (top + share) ── */
+    .post-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    /* ── ABOUT SECTION ── */
+    #about-section { display: none; }
+
+    .about-wrap {
+      max-width: 620px;
+    }
+
+    .about-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .about-body {
+      font-size: clamp(14px, 2.2vw, 16px);
+      font-weight: 300;
+      line-height: 1.95;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+    }
+    .about-body p { margin-bottom: 22px; }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    .about-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--line-s);
+      margin: 36px 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 20px 24px calc(20px + env(safe-area-inset-bottom));
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--line-s);
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .footer-about {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.18s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .footer-about:hover { color: var(--text); }
+
+    /* ── MOBILE TOUCH ── */
+    a, button, .qa-q, .cat-btn {
+      touch-action: manipulation;
+    }
+    /* Minimum tap target size (44px) for accessibility on mobile */
+    .cat-btn {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+    .qa-scroll-top, .qa-share-btn {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+    /* Prevent text selection flash on tap */
+    .qa-q, .cat-btn, .qa-scroll-top, .qa-share-btn {
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* Safe area padding for notched phones (iPhone X+) */
+    header {
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 520px) {
+      .header-top { padding: 0 14px; height: 50px; gap: 8px; }
+      nav { padding: 0 12px; }
+      main { padding: 28px 14px 80px; padding-top: calc(88px + 28px); }
+      .search-wrap { max-width: none; }
+      .qa-a-text { padding-right: 0; }
+      #lang-toggle button { padding: 5px 8px; font-size: 9px; }
+      .about-wrap { max-width: 100%; }
+      .about-heading { font-size: clamp(18px, 5vw, 24px); margin-bottom: 24px; }
+      footer { padding: 16px 14px calc(16px + env(safe-area-inset-bottom)); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <!-- Scroll progress bar for blog posts -->
+  <div id="read-progress"></div>
+  <div class="header-top">
+    <a class="site-logo" onclick="resetAll()" id="site-logo">ヴィーガン<span>ガイド</span></a>
+    <div class="header-right">
+      <div class="search-wrap">
+        <input id="search-input" type="text" autocomplete="off" oninput="onSearch()" />
+        <button class="search-clear" id="search-clear" onclick="clearSearch()" aria-label="clear">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="1" y1="1" x2="9" y2="9"/>
+            <line x1="9" y1="1" x2="1" y2="9"/>
+          </svg>
+        </button>
+        <button class="search-icon-btn" onclick="document.getElementById('search-input').focus()" aria-label="search">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="5.5" cy="5.5" r="4"/>
+            <line x1="9" y1="9" x2="12" y2="12"/>
+          </svg>
+        </button>
+      </div>
+      <div id="lang-toggle">
+        <button id="btn-jp" onclick="setLang('jp')">日本語</button>
+        <button id="btn-en" onclick="setLang('en')">en</button>
+      </div>
+    </div>
+  </div>
+  <nav id="nav"></nav>
+</header>
+
+<main>
+  <!-- Q&A section -->
+  <div id="qa-section">
+    <div id="result-info"></div>
+    <div id="list"></div>
+    <div id="empty"></div>
+  </div>
+
+  <!-- Blog list -->
+  <div id="blog-section">
+    <div id="blog-list" class="blog-list"></div>
+  </div>
+
+  <!-- Single blog post -->
+  <div id="blog-post">
+    <button class="post-back" onclick="showBlog()" id="post-back-btn">← blog</button>
+    <div id="post-content"></div>
+  </div>
+
+  <!-- About -->
+  <div id="about-section">
+    <div class="about-wrap">
+      <div class="about-heading" id="about-heading">about</div>
+      <div class="about-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+        <div class="about-divider"></div>
+        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+        <p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>
+        <div class="about-divider"></div>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias.</p>
+        <p>Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="site-footer">
+  <button class="footer-about" id="footer-about-btn" onclick="showAbout()">about</button>
+  <span id="footer-copy">&copy; vegan guide</span>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════
+   ★  PARAMETER  ★
+   language_exchange = 1  → bilingual toggle visible
+   language_exchange = 0  → Japanese only, toggle hidden
+   ════════════════════════════════════════════════ */
+const language_exchange = 1;
+
+/* ════════════════════════════════════════════════
+   CATEGORY CONFIG
+   key      : internal identifier (matches JSON "category" field)
+   label-jp : shown in nav when lang === 'jp'
+   label-en : shown in nav when lang === 'en'
+   sep      : show separator BEFORE this item
+   ════════════════════════════════════════════════ */
+const CATS = [
+  { key: 'all',       'label-jp': 'すべて',   'label-en': 'all',       sep: false },
+  { key: 'why',       'label-jp': 'なぜ',     'label-en': 'why',       sep: true  },
+  { key: 'how',       'label-jp': 'どうやって','label-en': 'how',       sep: false },
+  { key: 'resources', 'label-jp': '参考資料', 'label-en': 'resources', sep: false },
+];
+
+/* ════════════════════════════════════════════════
+   QUESTIONS — loaded from questions.json
+   Edit questions.json to add/update questions.
+   ════════════════════════════════════════════════ */
+let QUESTIONS = [];
+
+/* ════════════════════════════════════════════════
+   BLOG POSTS
+   Each post: id, date, title-jp, title-en,
+   image (URL or null), body-jp, body-en
+   ════════════════════════════════════════════════ */
+const BLOG_PER_PAGE = 10;
+let blogPage = 0; // 0-indexed current page
+
+const BLOG_POSTS = [
+  {
+    id: "blog-001",
+    date: "2025-11-03",
+    "title-jp": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — ut enim ad minim veniam",
+    "title-en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — ut enim ad minim veniam",
+    image: null,
+    "body-jp": `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p><p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>`,
+    "body-en": `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p><p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>`
+  },
+  {
+    id: "blog-002",
+    date: "2025-10-18",
+    "title-jp": "Ut labore et dolore magnam aliquam quaerat voluptatem — nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit",
+    "title-en": "Ut labore et dolore magnam aliquam quaerat voluptatem — nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit",
+    image: null,
+    "body-jp": `<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p><p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`,
+    "body-en": `<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p><p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>`
+  },
+  {
+    id: "blog-003",
+    date: "2025-09-29",
+    "title-jp": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur — vel illum qui dolorem eum fugiat",
+    "title-en": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur — vel illum qui dolorem eum fugiat",
+    image: null,
+    "body-jp": `<p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p><p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>`,
+    "body-en": `<p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p><p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>`
+  }
+];
+
+
+const UI = {
+  jp: {
+    placeholder:  '検索…',
+    empty:        '見つかりませんでした。',
+    resultSearch: (q, n) => `「${q}」— ${n} 件`,
+    resultCat:    (cat, n) => `${cat}  —  ${n} 件`,
+    resultAll:    n => `${n} 件`,
+    scrollTop:    '↑ 上へ',
+    share:        'この質問をシェア',
+    shareBlog:    'このブログをシェア',
+    copied:       'コピーしました',
+    blog:         'ブログ',
+    backToBlog:   '← ブログ一覧',
+    blogResults:  'ブログ',
+    about:        'サイトについて',
+    aboutHeading: 'このサイトについて',
+    copyright:    '© ヴィーガンガイド',
+  },
+  en: {
+    placeholder:  'search…',
+    empty:        'no results found.',
+    resultSearch: (q, n) => `"${q}" — ${n} result${n === 1 ? '' : 's'}`,
+    resultCat:    (cat, n) => `${cat}  —  ${n} result${n === 1 ? '' : 's'}`,
+    resultAll:    n => `${n} entries`,
+    scrollTop:    '↑ top',
+    share:        'share this question',
+    shareBlog:    'share this post',
+    copied:       'copied',
+    blog:         'blog',
+    backToBlog:   '← blog',
+    blogResults:  'blog',
+    about:        'about',
+    aboutHeading: 'about this site',
+    copyright:    '© vegan guide',
+  }
+};
+
+/* ════════════════════════════════════════════════
+   STATE
+   ════════════════════════════════════════════════ */
+let lang        = 'jp';
+let activeCat   = 'all';
+let searchQuery = '';
+let openId      = null;
+let view        = 'qa'; // 'qa' | 'blog' | 'post'
+let activePost  = null;
+
+/* ════════════════════════════════════════════════
+   BOOT — apply language_exchange param
+   ════════════════════════════════════════════════ */
+(async function boot() {
+  // ── Fetch questions from JSON ──────────────────
+  try {
+    const res = await fetch('questions.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    QUESTIONS = await res.json();
+  } catch (e) {
+    console.warn('Could not load questions.json:', e.message);
+    // QUESTIONS stays [] — site still loads, just empty
+  }
+
+  if (!language_exchange) {
+    document.getElementById('lang-toggle').classList.add('hidden');
+  }
+  document.getElementById('footer-about-btn').textContent = UI[lang].about;
+  document.getElementById('footer-copy').textContent = UI[lang].copyright;
+  showSection('qa');
+  syncLangButtons();
+  buildNav();
+  render();
+  handleHash();
+})();
+
+/* ════════════════════════════════════════════════
+   LANGUAGE
+   ════════════════════════════════════════════════ */
+function setLang(l) {
+  if (l === lang) return;
+  lang = l;
+  document.documentElement.lang = l === 'jp' ? 'ja' : 'en';
+  syncLangButtons();
+  document.getElementById('search-input').placeholder = UI[lang].placeholder;
+  const logo = document.getElementById('site-logo');
+  if (lang === 'jp') logo.innerHTML = 'ヴィーガン<span style="color:var(--accent)">ガイド</span>';
+  else               logo.innerHTML = 'vegan<span style="color:var(--accent)">guide</span>';
+  buildNav();
+  // update footer labels
+  document.getElementById('footer-about-btn').textContent = UI[lang].about;
+  document.getElementById('footer-copy').textContent = UI[lang].copyright;
+  if (view === 'about') {
+    document.getElementById('about-heading').textContent = UI[lang].aboutHeading;
+  } else if (view === 'blog') renderBlogList();
+  else if (view === 'post' && activePost) renderPost(activePost);
+  else render();
+}
+
+function syncLangButtons() {
+  document.getElementById('btn-jp').classList.toggle('active', lang === 'jp');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+
+/* ════════════════════════════════════════════════
+   NAV
+   ════════════════════════════════════════════════ */
+function buildNav() {
+  const nav = document.getElementById('nav');
+  const labelKey = `label-${lang}`;
+  let html = '';
+  CATS.forEach(c => {
+    if (c.sep) html += '<div class="nav-sep"></div>';
+    const label = c[labelKey] || c['label-jp'];
+    const active = view === 'qa' && activeCat === c.key;
+    html += `<button class="cat-btn${active ? ' active' : ''}" onclick="setCat('${c.key}')">${label}</button>`;
+  });
+  html += '<div class="nav-sep"></div>';
+  html += `<button class="blog-btn${view === 'blog' || view === 'post' ? ' active' : ''}" onclick="showBlog()">${UI[lang].blog}</button>`;
+  nav.innerHTML = html;
+}
+
+function setCat(key) {
+  activeCat = key;
+  openId = null;
+  history.replaceState(null, '', location.pathname);
+  showSection('qa');
+  buildNav();
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ════════════════════════════════════════════════
+   SECTION VISIBILITY
+   ════════════════════════════════════════════════ */
+function showSection(v) {
+  view = v;
+  document.getElementById('qa-section').style.display     = v === 'qa'    ? 'block' : 'none';
+  document.getElementById('blog-section').style.display   = v === 'blog'  ? 'block' : 'none';
+  document.getElementById('blog-post').style.display      = v === 'post'  ? 'block' : 'none';
+  document.getElementById('about-section').style.display  = v === 'about' ? 'block' : 'none';
+  // progress bar: only visible in post view
+  const bar = document.getElementById('read-progress');
+  if (v !== 'post') { bar.style.display = 'none'; bar.style.width = '0%'; }
+  else { bar.style.display = 'block'; bar.style.width = '0%'; }
+}
+
+/* ════════════════════════════════════════════════
+   SEARCH
+   ════════════════════════════════════════════════ */
+function onSearch() {
+  searchQuery = document.getElementById('search-input').value.trim();
+  if (searchQuery) { activeCat = 'all'; }
+  openId = null;
+  // show/hide clear button
+  document.getElementById('search-clear').classList.toggle('visible', searchQuery.length > 0);
+  showSection('qa');
+  buildNav();
+  render();
+}
+
+function clearSearch() {
+  searchQuery = '';
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-clear').classList.remove('visible');
+  openId = null;
+  showSection('qa');
+  buildNav();
+  render();
+}
+
+function resetAll() {
+  activeCat = 'all';
+  searchQuery = '';
+  openId = null;
+  activePost = null;
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-clear').classList.remove('visible');
+  history.replaceState(null, '', location.pathname);
+  showSection('qa');
+  buildNav();
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ════════════════════════════════════════════════
+   FILTER
+   ════════════════════════════════════════════════ */
+function filtered() {
+  let items = QUESTIONS;
+  if (activeCat !== 'all') {
+    items = items.filter(q => (q.category || '') === activeCat);
+  }
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    // always search both languages so JP and EN terms always work
+    items = items.filter(i =>
+      (i['question-jp'] || '').toLowerCase().includes(q) ||
+      (i['answer-jp']   || '').toLowerCase().includes(q) ||
+      (i['question-en'] || '').toLowerCase().includes(q) ||
+      (i['answer-en']   || '').toLowerCase().includes(q)
+    );
+  }
+  return items;
+}
+
+/* ════════════════════════════════════════════════
+   RENDER
+   ════════════════════════════════════════════════ */
+function render() {
+  const items = filtered();
+  const list  = document.getElementById('list');
+  const empty = document.getElementById('empty');
+  const info  = document.getElementById('result-info');
+  const ui    = UI[lang];
+
+  empty.textContent = ui.empty;
+
+  // Blog search results (only when searching)
+  const blogItems = searchQuery ? filteredBlog() : [];
+
+  if (!items.length && !blogItems.length) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    info.textContent = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // result info — total count includes blog hits
+  if (searchQuery) {
+    info.textContent = ui.resultSearch(searchQuery, items.length + blogItems.length);
+  } else if (activeCat !== 'all') {
+    const cat = CATS.find(c => c.key === activeCat);
+    const catLabel = cat ? (cat[`label-${lang}`] || cat['label-jp']) : activeCat;
+    info.textContent = ui.resultCat(catLabel, items.length);
+  } else {
+    info.textContent = ui.resultAll(items.length);
+  }
+
+  const showGroups = activeCat === 'all' && !searchQuery;
+  let html = '';
+
+  if (showGroups) {
+    const catOrder = CATS.filter(c => c.key !== 'all').map(c => c.key);
+    const byCat = {};
+    items.forEach(q => { (byCat[q.category] = byCat[q.category] || []).push(q); });
+
+    catOrder.forEach(catKey => {
+      if (!byCat[catKey]) return;
+      const catObj   = CATS.find(c => c.key === catKey);
+      const catLabel = catObj ? (catObj[`label-${lang}`] || catObj['label-jp']) : catKey;
+      html += `<div class="cat-label">${catLabel}</div>`;
+      byCat[catKey].forEach(q => { html += buildItem(q); });
+    });
+    items.forEach(q => {
+      if (!CATS.filter(c=>c.key!=='all').map(c=>c.key).includes(q.category)) html += buildItem(q);
+    });
+  } else {
+    // Category filter or search: Q&A items grouped by category
+    if (searchQuery && items.length) {
+      const catOrder = CATS.filter(c => c.key !== 'all').map(c => c.key);
+      const byCat = {};
+      items.forEach(q => { (byCat[q.category] = byCat[q.category] || []).push(q); });
+      catOrder.forEach(catKey => {
+        if (!byCat[catKey]) return;
+        const catObj   = CATS.find(c => c.key === catKey);
+        const catLabel = catObj ? (catObj[`label-${lang}`] || catObj['label-jp']) : catKey;
+        html += `<div class="cat-label">${catLabel}</div>`;
+        byCat[catKey].forEach(q => { html += buildItem(q); });
+      });
+    } else {
+      items.forEach(q => { html += buildItem(q); });
+    }
+
+    // Blog results appended at the bottom under "blog" group label
+    if (blogItems.length) {
+      html += `<div class="cat-label">${ui.blogResults}</div>`;
+      blogItems.forEach(p => { html += buildBlogSearchCard(p); });
+    }
+  }
+
+  list.innerHTML = html;
+
+  if (openId) {
+    const el = document.getElementById('i-' + openId);
+    if (el) el.classList.add('open');
+  }
+}
+
+/* Filter blog posts by search query */
+function filteredBlog() {
+  if (!searchQuery) return [];
+  const q = searchQuery.toLowerCase();
+  return BLOG_POSTS.filter(p =>
+    (p[`title-${lang}`] || p['title-jp'] || '').toLowerCase().includes(q) ||
+    (p[`title-en`]      || '').toLowerCase().includes(q) ||
+    (p[`body-${lang}`]  || p['body-jp']  || '').replace(/<[^>]+>/g,'').toLowerCase().includes(q) ||
+    (p[`body-en`]       || '').replace(/<[^>]+>/g,'').toLowerCase().includes(q)
+  );
+}
+
+/* Build a compact blog search result card */
+function buildBlogSearchCard(p) {
+  const title = hl((p[`title-${lang}`] || p['title-jp'] || '').replace(/</g,'&lt;'));
+  const thumb = p.image
+    ? `<img src="${p.image}" alt="" loading="lazy" />`
+    : `<div class="blog-search-placeholder">文</div>`;
+  return `<div class="blog-search-card" onclick="openPost('${p.id}')">
+  <div class="blog-search-thumb">${thumb}</div>
+  <div class="blog-search-title">${title}</div>
+</div>`;
+}
+
+function buildItem(q) {
+  const id   = q.id;
+  const qRaw = q[`question-${lang}`] || q['question-jp'] || '';
+  const aRaw = q[`answer-${lang}`]   || q['answer-jp']   || '';
+  const qTxt = hl(qRaw);
+  const aTxt = hl(aRaw);
+  const open = openId === id;
+  const shareUrl = `${location.origin}${location.pathname}#${id}`;
+  const ui = UI[lang];
+  return `<div class="qa-item${open ? ' open' : ''}" id="i-${id}">
+  <div class="qa-q" onclick="toggle('${id}')">
+    <div class="qa-q-text">${qTxt}</div>
+    <svg class="qa-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3">
+      <line x1="7" y1="1" x2="7" y2="13"/>
+      <line x1="1" y1="7" x2="13" y2="7"/>
+    </svg>
+  </div>
+  <div class="qa-body"><div class="qa-body-inner">
+    <div class="qa-a-text">${aTxt}</div>
+    <div class="qa-footer">
+      <button class="qa-scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">${ui.scrollTop}</button>
+      <div class="qa-share-wrap">
+        <button class="qa-share-btn" onclick="copyLink('${id}','${esc(shareUrl)}')">
+          <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3">
+            <rect x="4" y="4" width="8" height="8" rx="1"/>
+            <path d="M2 10V2h8"/>
+          </svg>
+          ${ui.share}
+        </button>
+        <span class="qa-copy-feedback" id="fb-${id}"></span>
+      </div>
+    </div>
+  </div></div>
+</div>`;
+}
+
+/* ════════════════════════════════════════════════
+   TOGGLE
+   ════════════════════════════════════════════════ */
+function toggle(id) {
+  if (openId === id) {
+    document.getElementById('i-' + id)?.classList.remove('open');
+    openId = null;
+    history.replaceState(null, '', location.pathname + location.search);
+  } else {
+    if (openId) document.getElementById('i-' + openId)?.classList.remove('open');
+    document.getElementById('i-' + id)?.classList.add('open');
+    openId = id;
+    history.replaceState(null, '', '#' + id);
+  }
+}
+
+/* ════════════════════════════════════════════════
+   COPY LINK — with iOS fallback
+   ════════════════════════════════════════════════ */
+function copyLink(id, url) {
+  const show = () => {
+    const fb = document.getElementById('fb-' + id);
+    if (!fb) return;
+    fb.textContent = UI[lang].copied;
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 1800);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(show).catch(() => fallbackCopy(url, show));
+  } else {
+    fallbackCopy(url, show);
+  }
+}
+
+function fallbackCopy(text, cb) {
+  // Works on iOS Safari without Clipboard API
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  // iOS needs setSelectionRange
+  ta.setSelectionRange(0, 99999);
+  try { document.execCommand('copy'); cb(); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+/* ════════════════════════════════════════════════
+   DEEP LINK — open item from URL hash on load
+   ════════════════════════════════════════════════ */
+function handleHash() {
+  const hash = location.hash.slice(1);
+  if (!hash) return;
+
+  // blog post deep link
+  const blogPost = BLOG_POSTS.find(p => p.id === hash);
+  if (blogPost) { openPost(blogPost.id); return; }
+
+  // Q&A deep link
+  const q = QUESTIONS.find(q => q.id === hash);
+  if (!q) return;
+  openId = hash;
+  activeCat = 'all';
+  searchQuery = '';
+  view = 'qa';
+  buildNav();
+  render();
+
+  function scrollToItem() {
+    const el = document.getElementById('i-' + hash);
+    const header = document.querySelector('header');
+    if (!el) return;
+    const headerH = header ? header.getBoundingClientRect().height : 0;
+    const top = el.getBoundingClientRect().top + window.scrollY - headerH - 8;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+  setTimeout(scrollToItem, 420);
+  setTimeout(scrollToItem, 900);
+}
+
+/* ════════════════════════════════════════════════
+   BLOG
+   ════════════════════════════════════════════════ */
+function showAbout() {
+  showSection('about');
+  buildNav();
+  document.getElementById('about-heading').textContent    = UI[lang].aboutHeading;
+  document.getElementById('footer-about-btn').textContent = UI[lang].about;
+  history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showBlog() {
+  activePost = null;
+  blogPage = 0;
+  showSection('blog');
+  buildNav();
+  renderBlogList();
+  history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  if (lang === 'jp') {
+    return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+  }
+  return d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+}
+
+function renderBlogList() {
+  const container = document.getElementById('blog-list');
+  const total = BLOG_POSTS.length;
+  const totalPages = Math.max(1, Math.ceil(total / BLOG_PER_PAGE));
+  const start = blogPage * BLOG_PER_PAGE;
+  const pagePosts = BLOG_POSTS.slice(start, start + BLOG_PER_PAGE);
+
+  let html = '';
+
+  // Post cards
+  pagePosts.forEach(p => {
+    const title = p[`title-${lang}`] || p['title-jp'];
+    const thumb = p.image
+      ? `<img src="${p.image}" alt="" loading="lazy" />`
+      : `<div class="blog-thumb-placeholder">文</div>`;
+    html += `
+      <div class="blog-card" onclick="openPost('${p.id}')">
+        <div class="blog-thumb">${thumb}</div>
+        <div class="blog-meta">
+          <div class="blog-date">${formatDate(p.date)}</div>
+          <div class="blog-title">${esc(title)}</div>
+        </div>
+      </div>`;
+  });
+
+  // Pagination — only if more than one page
+  if (totalPages > 1) {
+    html += '<div class="blog-pagination">';
+
+    // Prev arrow
+    html += `<button class="page-btn" onclick="goPage(${blogPage-1})" ${blogPage === 0 ? 'disabled' : ''} aria-label="prev">←</button>`;
+
+    // Build the page number sequence with smart ellipsis
+    // Always show: first, last, current, and up to 1 neighbor each side.
+    // Insert "…" where there are gaps of 2+.
+    const pages = buildPageSequence(blogPage, totalPages);
+    pages.forEach(item => {
+      if (item === '…') {
+        html += `<span class="page-ellipsis">…</span>`;
+      } else {
+        const i = item;
+        html += `<button class="page-btn${i === blogPage ? ' active' : ''}" onclick="goPage(${i})" aria-label="page ${i+1}">${i+1}</button>`;
+      }
+    });
+
+    // Next arrow
+    html += `<button class="page-btn" onclick="goPage(${blogPage+1})" ${blogPage === totalPages-1 ? 'disabled' : ''} aria-label="next">→</button>`;
+
+    html += '</div>';
+  }
+
+  container.innerHTML = html;
+}
+
+// Returns an array of page indices (0-based) and '…' strings
+function buildPageSequence(current, total) {
+  // Collect which page indices to show
+  const show = new Set();
+  show.add(0);
+  show.add(total - 1);
+  show.add(current);
+  if (current > 0)       show.add(current - 1);
+  if (current < total-1) show.add(current + 1);
+
+  const sorted = [...show].sort((a, b) => a - b);
+  const result = [];
+
+  sorted.forEach((page, idx) => {
+    if (idx > 0) {
+      const prev = sorted[idx - 1];
+      if (page - prev === 2) {
+        // single gap — just insert the missing page directly
+        result.push(prev + 1);
+      } else if (page - prev > 2) {
+        result.push('…');
+      }
+    }
+    result.push(page);
+  });
+
+  return result;
+}
+
+function goPage(p) {
+  blogPage = p;
+  renderBlogList();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openPost(id) {
+  const p = BLOG_POSTS.find(p => p.id === id);
+  if (!p) return;
+  activePost = p;
+  showSection('post');
+  buildNav();
+  renderPost(p);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderPost(p) {
+  const title    = p[`title-${lang}`] || p['title-jp'];
+  const body     = p[`body-${lang}`]  || p['body-jp'];
+  const hero     = p.image
+    ? `<img class="post-hero" src="${p.image}" alt="" loading="lazy" />`
+    : `<div class="post-hero-placeholder">文</div>`;
+  const shareUrl = `${location.origin}${location.pathname}#${p.id}`;
+  const ui       = UI[lang];
+
+  // update URL hash silently
+  history.replaceState(null, '', '#' + p.id);
+
+  document.getElementById('post-back-btn').textContent = ui.backToBlog;
+
+  document.getElementById('post-content').innerHTML = `
+    <div class="post-header">
+      <div class="post-date">${formatDate(p.date)}</div>
+      <div class="post-title">${esc(title)}</div>
+      ${hero}
+    </div>
+    <div class="post-divider"></div>
+    <div class="post-body">${body}</div>
+    <div class="post-footer">
+      <button class="qa-scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">${ui.scrollTop}</button>
+      <div class="qa-share-wrap">
+        <button class="qa-share-btn" onclick="copyPostLink('${p.id}','${shareUrl.replace(/'/g,"\\'")}')">
+          <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3">
+            <rect x="4" y="4" width="8" height="8" rx="1"/>
+            <path d="M2 10V2h8"/>
+          </svg>
+          ${ui.shareBlog}
+        </button>
+        <span class="qa-copy-feedback" id="fb-post-${p.id}"></span>
+      </div>
+    </div>
+  `;
+}
+
+function copyPostLink(id, url) {
+  const show = () => {
+    const fb = document.getElementById('fb-post-' + id);
+    if (!fb) return;
+    fb.textContent = UI[lang].copied;
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(show).catch(() => fallbackCopy(url, show));
+  } else {
+    fallbackCopy(url, show);
+  }
+}
+
+/* ════════════════════════════════════════════════
+   SCROLL PROGRESS (blog post only)
+   ════════════════════════════════════════════════ */
+function updateReadProgress() {
+  const bar = document.getElementById('read-progress');
+  if (view !== 'post') { bar.style.display = 'none'; return; }
+  bar.style.display = 'block';
+  const scrollTop  = window.scrollY;
+  const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+  bar.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateReadProgress, { passive: true });
+
+/* ════════════════════════════════════════════════
+   HIGHLIGHT
+   ════════════════════════════════════════════════ */
+function esc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function hl(text) {
+  if (!searchQuery) return esc(text);
+  const safe = esc(text);
+  const re   = new RegExp(`(${esc(searchQuery).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return safe.replace(re, '<mark>$1</mark>');
+}
+</script>
+</body>
+</html>
