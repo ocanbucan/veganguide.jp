@@ -1,0 +1,346 @@
+[
+  {
+    "id": "why-001",
+    "category": "why",
+    "question-en": "What is veganism?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "ヴィーガニズムとは何ですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-002",
+    "category": "why",
+    "question-en": "Why should I go vegan?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "なぜヴィーガンになるべきなのですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-003",
+    "category": "why",
+    "question-en": "Wouldn't the problem disappear if animals were treated better?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "動物をより良く扱えば問題は解決しませんか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-004",
+    "category": "why",
+    "question-en": "Don't I need animal foods to survive?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "生きていくために動物性食品は必要ではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-005",
+    "category": "why",
+    "question-en": "Don't plants have feelings too?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "植物にも命があるのではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-006",
+    "category": "why",
+    "question-en": "If sentience is the issue, wouldn't the problem be solved if we anesthetized animals before killing them?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "問題が感覚能力にあるなら、動物を麻酔して屠殺すれば解決しませんか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-007",
+    "category": "why",
+    "question-en": "But isn't eating animals natural?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "でも、動物を食べることは自然なことではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-008",
+    "category": "why",
+    "question-en": "But my religion says animals were created for us.",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "しかし私の宗教では、動物は私たちのために創られたと教えています。",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-009",
+    "category": "why",
+    "question-en": "What is the problem with dairy, eggs, and honey?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "乳製品、卵、はちみつの何が問題なのですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-010",
+    "category": "why",
+    "question-en": "But I heard cows constantly produce milk. If we don't milk them, won't the excess hurt them?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "でも、牛は常に乳を出し続けると聞きました。搾乳しなければ余分な乳が痛みを与えませんか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-011",
+    "category": "why",
+    "question-en": "What is the problem with fur, leather, wool, silk, and other animal-derived materials?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "毛皮、皮革、羊毛、絹などの動物由来素材の何が問題なのですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-012",
+    "category": "why",
+    "question-en": "Will my individual choice to go vegan actually make a difference?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "私が個人的にヴィーガンになることで、本当に変化が生まれますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-013",
+    "category": "why",
+    "question-en": "But don't animals eat other animals too?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "でも、動物も動物を食べているのではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-014",
+    "category": "why",
+    "question-en": "What will happen to people who make their living from animal agriculture?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "畜産業で生計を立てている人たちはどうなりますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-015",
+    "category": "why",
+    "question-en": "What does the word speciesism mean?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "「種差別（スペシシズム）」という言葉はどういう意味ですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-016",
+    "category": "why",
+    "question-en": "Is it wrong to eat animals that are already dead or to consume animal products found in the trash?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "すでに死んでいる動物を食べたり、廃棄された動物性製品を消費したりすることも間違っていますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-017",
+    "category": "why",
+    "question-en": "Isn't veganism not fully possible in a speciesist world?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "種差別が蔓延する世界では、ヴィーガニズムを完全に実践することはできないのではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-018",
+    "category": "why",
+    "question-en": "Shouldn't we think about humans whose rights are being violated before thinking about animals?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "動物のことを考える前に、権利を侵害されている人間のことを考えるべきではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-019",
+    "category": "why",
+    "question-en": "Even if we go vegan, won't animals continue to die in fields and farms?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "私たちがヴィーガンになっても、動物は畑や農場で死に続けるのではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-020",
+    "category": "why",
+    "question-en": "I'm an environmentalist — does going vegan relate to the environment?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "私は環境活動家ですが、ヴィーガンになることは環境と関係がありますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-021",
+    "category": "why",
+    "question-en": "Isn't animal rights part of the ecological struggle?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "動物の権利は生態系をめぐる闘いの一部ではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-022",
+    "category": "why",
+    "question-en": "Is animal exploitation caused by today's capitalist system?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "動物の搾取は今日の資本主義システムによって引き起こされているのですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-023",
+    "category": "why",
+    "question-en": "Why settle for opposing only the property status of animals when we could oppose all property?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "すべての所有に反対できるのに、なぜ動物の所有物としての地位に反対するだけで満足するのですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-024",
+    "category": "why",
+    "question-en": "Do you propose replacing animal labor in agriculture with machines? Isn't that also exploitation of nature?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "農業での動物の労働を機械に置き換えることを提案しているのですか？それも自然の搾取ではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "why-025",
+    "category": "why",
+    "question-en": "Why should opposing speciesism require me to oppose all other forms of discrimination?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "種差別に反対することが、なぜ他のすべての差別にも反対することを求めるのですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-001",
+    "category": "how",
+    "question-en": "Isn't going vegan very difficult?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "ヴィーガンになることはとても難しくないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-002",
+    "category": "how",
+    "question-en": "Should I become vegetarian before going vegan?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "ヴィーガンになる前にベジタリアンになるべきですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-003",
+    "category": "how",
+    "question-en": "Isn't being vegan very expensive?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "ヴィーガンであることはとても費用がかかりませんか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-004",
+    "category": "how",
+    "question-en": "Isn't going vegan too extreme?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "ヴィーガンになることは極端すぎませんか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-005",
+    "category": "how",
+    "question-en": "But there are no vegan products where I live.",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "でも、私の住む地域にはヴィーガン製品がありません。",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-006",
+    "category": "how",
+    "question-en": "How will I find food when eating out or at work?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "外食や職場での食事はどうすれば見つけられますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-007",
+    "category": "how",
+    "question-en": "What should I do if my family and friends oppose my veganism?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "家族や友人がヴィーガンであることに反対したらどうすればよいですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-008",
+    "category": "how",
+    "question-en": "Isn't it rude to refuse non-vegan food when offered to me?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "ヴィーガンでない食べ物を勧められたときに断るのは失礼ではないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-009",
+    "category": "how",
+    "question-en": "What should I do with non-vegan food and clothing I've already purchased?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "すでに購入したヴィーガンでない食品や衣類はどうすればよいですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-010",
+    "category": "how",
+    "question-en": "Should I consume foods labeled as containing trace amounts of animal products as an allergen warning?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "アレルゲン警告としてごく微量の動物性製品を含むと表示されている食品を食べてもよいですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-011",
+    "category": "how",
+    "question-en": "How can we end animal slavery?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "動物の奴隷制をどうすれば終わらせることができますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-012",
+    "category": "how",
+    "question-en": "Can't I advocate for animals without going vegan?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "ヴィーガンにならなくても動物のために声を上げることはできませんか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-013",
+    "category": "how",
+    "question-en": "Since the world won't go vegan overnight, isn't it right to take action to reduce animal suffering?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "世界が一夜でヴィーガンにならないとすれば、動物の苦しみを減らすために行動することは正しくないですか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-014",
+    "category": "how",
+    "question-en": "Does supporting high-visibility campaigns — like those against fur, circuses, or animal testing — lead to short-term gains?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "毛皮、サーカス、動物実験反対など注目度の高いキャンペーンを支援することは、短期的な成果につながりますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-015",
+    "category": "how",
+    "question-en": "Does working for laws that improve animals' conditions benefit them?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "動物の状況を改善する法律のために活動することは、動物の助けになりますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-016",
+    "category": "how",
+    "question-en": "Can I support animal rights by signing petitions?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "署名活動に参加することで動物の権利を支援できますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "how-017",
+    "category": "how",
+    "question-en": "Does fostering and caring for cats, dogs, and other animals conflict with veganism?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "猫、犬、その他の動物を引き取って世話をすることはヴィーガニズムと矛盾しますか？",
+    "answer-jp": "ロレム・イプサム。"
+  },
+  {
+    "id": "resources-001",
+    "category": "resources",
+    "question-en": "How can I connect with vegan communities?",
+    "answer-en": "Lorem ipsum.",
+    "question-jp": "ヴィーガンコミュニティにはどうすれば参加できますか？",
+    "answer-jp": "ロレム・イプサム。"
+  }
+]
